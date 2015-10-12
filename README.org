@@ -1,0 +1,113 @@
+#+title: org-fs-tree
+
+* Why?
+
+I created it because I wanted to make notes under various file names
+as I walked through the source dirs of a project I was to contribute
+to at work.
+
+Soon, I found creating headings manually painful especially when
+similar file names occur in multiple subdirectories.
+
+My first reaction was to use the following snippet to generate a org
+skeleton.
+
+#+begin_src
+$ cd /base/of/src/dir
+$ find . -type f | sed 's/^/* /'
+#+end_src
+
+which in turn generated a new top-level heading for file in the
+tree. This turned out to be very cumbersome as well since there was no
+way to fold subtrees which I wasn't interested in looking at immediately
+
+Half-way creating new headings from common directory names and moving
+files to second-level headings etc. I noticed that I had lost a way to
+visit the files. With the full names, at least ~find-file-at-point~
+worked. Now even that only the filenames were in the leaf, navigation
+became painful again. The other alternative (retaining full path names
+in 2nd/3rd level headings) looked very ugly.
+
+It was time to slip on some elisp gloves.
+
+* How does org-fs-tree help?
+
+- Takes a directory name from the user and creates a org-mode tree
+corresponding to the tree rooted at the directory. 
+
+- All the tree-folding goodness and short headings shall serve you
+well.
+
+- Each heading is an org-mode link as well. ~C-c C-o~
+(~org-open-at-point) should serve you well for opening the files.
+
+- Since even file names are headings, you can make notes under the
+  file name
+
+** Example
+
+#+begin_src
+
+$ tree ~/test/
+
+/home/scriptdevil/test/
+|-- doc
+|   |-- boo
+|   |-- build-instructions.md
+|   `-- running-tests.md
+|-- include
+|   |-- bar.h
+|   `-- foo.h
+|-- README
+`-- src
+    |-- bar.c
+    `-- foo.c
+
+4 directories, 7 files
+#+end_src
+
+
+would in turn generate
+
+#+begin_src
+
+* [[/home/scriptdevil/test/][test/]]
+** [[/home/scriptdevil/test/README][README]]
+** [[/home/scriptdevil/test/doc/][doc/]]
+*** [[/home/scriptdevil/test/doc/boo/][boo/]]
+*** [[/home/scriptdevil/test/doc/build-instructions.md][build-instructions.md]]
+*** [[/home/scriptdevil/test/doc/running-tests.md][running-tests.md]]
+** [[/home/scriptdevil/test/include/][include/]]
+*** [[/home/scriptdevil/test/include/bar.h][bar.h]]
+*** [[/home/scriptdevil/test/include/foo.h][foo.h]]
+** [[/home/scriptdevil/test/src/][src/]]
+*** [[/home/scriptdevil/test/src/bar.c][bar.c]]
+*** [[/home/scriptdevil/test/src/foo.c][foo.c]]
+
+#+end_src
+
+I used this on the emacs source tree to generate
+[[examples/emacs-src.org]]
+
+*Note:* This was just a dump of the entire tree, in reality, you may
+not care about some directories like ~nextstep/~ or ~msdos/~. In that
+case, you can delete the entire subtree with the regular org-mode
+operations. Also, this looks really ugly online because github doesn't
+let you fold subtrees. View this in emacs and you will see what I mean
+
+Lastly, the links in this tree are rooted at /scratch/ because that is
+where I keep my emacs sources. Keeping full paths in all links lets
+you open the files with ~C-c C-o~ without having to consider what
+~$PWD~ is.
+
+* Usage
+In any org-mode buffer:
+
+M-x load-library ⏎ org-fs-tree
+M-x org-fs-tree-dump ⏎ /path/to/directory
+
+
+* Dependencies
+
+[[https://github.com/Malabarba/names][names]] for providing a namespace for the functions defined
+[[https://github.com/rejeep/f.el][f]] for a really neat API to work with files and directories
