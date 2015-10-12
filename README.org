@@ -103,11 +103,12 @@ you open the files with ~C-c C-o~ without having to consider what
 * Usage
 In any org-mode buffer:
 
+#+begin_src
 M-x load-library ⏎ org-fs-tree
-M-x org-fs-tree-dump ⏎ /path/to/directory
 
+M-x org-fs-tree-dump ⏎ /path/to/directory
+#+end_src
 
 * Dependencies
-
-[[https://github.com/Malabarba/names][names]] for providing a namespace for the functions defined
-[[https://github.com/rejeep/f.el][f]] for a really neat API to work with files and directories
+- [[https://github.com/Malabarba/names][names]] for providing a namespace for the functions defined
+- [[https://github.com/rejeep/f.el][f]] for a really neat API to work with files and directories
