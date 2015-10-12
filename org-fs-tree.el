@@ -58,7 +58,7 @@ Each heading in the org-tree will be a link to the corresponding
 file or directory that can be opened using org-open-at-point
 "
 
-  (interactive "DDirectory to dump:")
+  (interactive "DDirectory to dump: ")
   (insert (-create-tree dirname 1)))
 )
 
