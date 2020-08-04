@@ -104,9 +104,16 @@ you open the files with ~C-c C-o~ without having to consider what
 In any org-mode buffer:
 
 #+begin_src
+M-x package-install ⏎ f
+M-x package-install ⏎ names
 M-x load-library ⏎ org-fs-tree
 
+# To dump entire FS hierarchy rooted at /path/to/directory
 M-x org-fs-tree-dump ⏎ /path/to/directory
+
+# To restrict to say 3 levels of the FS hierarchy rooted at /path/to/directory
+
+C-u 3 M-x org-fs-tree-dump ⏎ /path/to/directory 
 #+end_src
 
 * Dependencies
