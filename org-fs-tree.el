@@ -1,4 +1,4 @@
-;;; org-fs-tree.el --- converts filesystem trees to org trees
+;;; org-fs-tree.el --- converts filesystem trees to org trees -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2020 Ashok Gautham Jadatharan
 
@@ -54,6 +54,7 @@
 	  heading)
       heading)))
 
+;;;###autoload
 (defun dump (arg dirname)
   "Dump the file system tree rooted at DIRNAME as an org tree.
 Each heading in the org-tree will be a link to the corresponding
