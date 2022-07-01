@@ -124,5 +124,5 @@ C-u 3 M-x org-fs-tree-dump ⏎ /path/to/directory
 Add to your packages.el
 #+begin_src elisp
 (package! org-fs-tree
- :recipe (:host github :repo "basaran/org-fs-tree"))
+ :recipe (:host github :repo "ScriptDevil/org-fs-tree"))
 #+end_src
