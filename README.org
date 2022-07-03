@@ -119,3 +119,10 @@ C-u 3 M-x org-fs-tree-dump ⏎ /path/to/directory
 * Dependencies
 - [[https://github.com/Malabarba/names][names]] for providing a namespace for the functions defined
 - [[https://github.com/rejeep/f.el][f]] for a really neat API to work with files and directories
+
+* doom emacs
+Add to your packages.el
+#+begin_src elisp
+(package! org-fs-tree
+ :recipe (:host github :repo "ScriptDevil/org-fs-tree"))
+#+end_src
